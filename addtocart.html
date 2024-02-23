@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Menu</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .food-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  #cart {
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+  img{
+    height: 300px;
+    width: 300px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Food Menu</h1>
+  <div class="food-item">
+    <span>Burger</span>
+    <img src="https://img.freepik.com/free-photo/double-hamburger-isolated-white-background-fresh-burger-fast-food-with-beef-cream-cheese_90220-1192.jpg?w=2000" alt="">
+    <span>Rs.80</span>
+    <button onclick="addToCart('Burger', 80)">Add to Cart</button>
+  </div>
+  <div class="food-item">
+    <span>Pizza</span>
+    <img src="https://www.shutterstock.com/shutterstock/photos/1829205563/display_1500/stock-photo-fresh-homemade-italian-pizza-margherita-with-buffalo-mozzarella-and-basil-1829205563.jpg" alt="">
+    <span>Rs.250</span>
+    <button onclick="addToCart('Pizza', 250)">Add to Cart</button>
+  </div>
+  <div class="food-item">
+    <span>Pasta</span>
+    <img src="https://images.alphacoders.com/130/1308370.jpg" alt="">
+    <span>Rs.190</span>
+    <button onclick="addToCart('Pasta', 190)">Add to Cart</button>
+  </div>
+  <div id="cart">
+    <h2>Cart</h2>
+    <ul id="cart-items"></ul>
+    <p>Total: Rs.<span id="totalPrice">0.00</span></p>
+  </div>
+</div>
+
+<script>
+  let cart = [];
+  let totalPrice = 0;
+
+  function addToCart(itemName, price) {
+    cart.push({ itemName, price });
+    totalPrice += price;
+    updateCartUI();
+  }
+
+  function updateCartUI() {
+    const cartItemsList = document.getElementById("cart-items");
+    const totalSpan = document.getElementById("totalPrice");
+
+    cartItemsList.innerHTML = "";
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = `${item.itemName} - Rs.${item.price.toFixed(2)}`;
+      cartItemsList.appendChild(li);
+    });
+
+    totalSpan.textContent = totalPrice.toFixed(2);
+  }
+</script>
+</body>
+</html>
